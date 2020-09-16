@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.log = new System.Windows.Forms.RichTextBox();
-            this.folderO = new System.Windows.Forms.ListView();
-            this.folderT = new System.Windows.Forms.ListView();
             this.btnCompare = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.patch = new System.Windows.Forms.TextBox();
+            this.patch2 = new System.Windows.Forms.TextBox();
             this.btnb = new System.Windows.Forms.Button();
             this.btnb1 = new System.Windows.Forms.Button();
             this.btnDump = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.folderO = new System.Windows.Forms.TreeView();
+            this.folderT = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // log
@@ -48,46 +50,29 @@
             this.log.TabIndex = 0;
             this.log.Text = "";
             // 
-            // folderO
-            // 
-            this.folderO.HideSelection = false;
-            this.folderO.Location = new System.Drawing.Point(12, 47);
-            this.folderO.Name = "folderO";
-            this.folderO.Size = new System.Drawing.Size(280, 140);
-            this.folderO.TabIndex = 1;
-            this.folderO.UseCompatibleStateImageBehavior = false;
-            // 
-            // folderT
-            // 
-            this.folderT.HideSelection = false;
-            this.folderT.Location = new System.Drawing.Point(376, 47);
-            this.folderT.Name = "folderT";
-            this.folderT.Size = new System.Drawing.Size(280, 140);
-            this.folderT.TabIndex = 2;
-            this.folderT.UseCompatibleStateImageBehavior = false;
-            // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(298, 80);
+            this.btnCompare.Location = new System.Drawing.Point(298, 82);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(72, 64);
             this.btnCompare.TabIndex = 3;
             this.btnCompare.Text = "Compare";
             this.btnCompare.UseVisualStyleBackColor = true;
+            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
-            // textBox1
+            // patch
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(230, 20);
-            this.textBox1.TabIndex = 4;
+            this.patch.Location = new System.Drawing.Point(12, 12);
+            this.patch.Name = "patch";
+            this.patch.Size = new System.Drawing.Size(230, 20);
+            this.patch.TabIndex = 4;
             // 
-            // textBox2
+            // patch2
             // 
-            this.textBox2.Location = new System.Drawing.Point(376, 12);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(230, 20);
-            this.textBox2.TabIndex = 5;
+            this.patch2.Location = new System.Drawing.Point(376, 12);
+            this.patch2.Name = "patch2";
+            this.patch2.Size = new System.Drawing.Size(230, 20);
+            this.patch2.TabIndex = 5;
             // 
             // btnb
             // 
@@ -97,6 +82,7 @@
             this.btnb.TabIndex = 6;
             this.btnb.Text = "...";
             this.btnb.UseVisualStyleBackColor = true;
+            this.btnb.Click += new System.EventHandler(this.btnb_Click);
             // 
             // btnb1
             // 
@@ -106,6 +92,7 @@
             this.btnb1.TabIndex = 7;
             this.btnb1.Text = "...";
             this.btnb1.UseVisualStyleBackColor = true;
+            this.btnb1.Click += new System.EventHandler(this.btnb1_Click);
             // 
             // btnDump
             // 
@@ -125,20 +112,34 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Logs";
             // 
+            // folderO
+            // 
+            this.folderO.Location = new System.Drawing.Point(12, 47);
+            this.folderO.Name = "folderO";
+            this.folderO.Size = new System.Drawing.Size(280, 140);
+            this.folderO.TabIndex = 10;
+            // 
+            // folderT
+            // 
+            this.folderT.Location = new System.Drawing.Point(376, 47);
+            this.folderT.Name = "folderT";
+            this.folderT.Size = new System.Drawing.Size(280, 140);
+            this.folderT.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 478);
+            this.Controls.Add(this.folderT);
+            this.Controls.Add(this.folderO);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDump);
             this.Controls.Add(this.btnb1);
             this.Controls.Add(this.btnb);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.patch2);
+            this.Controls.Add(this.patch);
             this.Controls.Add(this.btnCompare);
-            this.Controls.Add(this.folderT);
-            this.Controls.Add(this.folderO);
             this.Controls.Add(this.log);
             this.Name = "Form1";
             this.Text = "Compare Tool";
@@ -150,15 +151,16 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox log;
-        private System.Windows.Forms.ListView folderO;
-        private System.Windows.Forms.ListView folderT;
         private System.Windows.Forms.Button btnCompare;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox patch;
+        private System.Windows.Forms.TextBox patch2;
         private System.Windows.Forms.Button btnb;
         private System.Windows.Forms.Button btnb1;
         private System.Windows.Forms.Button btnDump;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TreeView folderO;
+        private System.Windows.Forms.TreeView folderT;
     }
 }
 
