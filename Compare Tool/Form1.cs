@@ -165,7 +165,13 @@ namespace Compare_Tool
 
         private void btnDump_Click(object sender, EventArgs e)
         {
-
+            using (var wt = new StreamWriter("out.txt"))
+            {
+                foreach (string s in outData)
+                {
+                    wt.WriteLine(s);
+                }
+            }
         }
     }
 }
